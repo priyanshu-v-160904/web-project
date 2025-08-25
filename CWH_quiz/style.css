@@ -1,0 +1,45 @@
+head{
+    position: absolute;
+    background-color: black;
+}
+body{
+    background-image: url(hehe.jpeg) ;
+    
+    /* use repeat to fix background image */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: 1200px 1000px;
+    
+   
+}
+#name_game{
+    color: rgb(184, 223, 224);
+    font-size: 30px;
+    font-style: oblique;
+    font-weight: bold;
+    text-decoration: underline;
+    text-align: center;
+
+
+
+}
+h1{
+    color:rgb(212, 228, 230);
+    font-size: 57px;
+    text-align: center;
+    text-decoration: underline;
+
+}
+#movie{
+    color:beige;
+    font-size: 30px;
+    font-style: oblique;
+    font-weight: bold;
+    text-decoration: underline;
+    text-align: center;
+
+}
+#game{
+    text-align: center;
+}
