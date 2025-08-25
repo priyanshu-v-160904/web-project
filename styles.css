@@ -1,0 +1,158 @@
+/* --- basic reset --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* --- theme colors --- */
+:root {
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --text: #1a1a1a;
+  --muted: #6b7280;
+  --accent: #6366f1;   /* indigo */
+  --accent-weak: #e0e7ff;
+  --shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1220;
+    --card: #151a2c;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --accent: #8b5cf6;
+    --accent-weak: #2a2144;
+    --shadow: 0 10px 25px rgba(0,0,0,0.35);
+  }
+}
+
+/* --- page layout --- */
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(1200px 800px at 80% -10%, var(--accent-weak), transparent 60%),
+    radial-gradient(1000px 700px at -10% 110%, var(--accent-weak), transparent 60%),
+    var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+/* --- card container (applies to the whole page content) --- */
+main, body > div, body > section {
+  /* if you later wrap your content, these styles will apply to that wrapper too */
+}
+
+.container {
+  width: min(720px, 92vw);
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 24px 20px;
+  animation: fadeIn 400ms ease-out;
+}
+
+/* if you don't have a wrapper, style body content as a card */
+body > h1:first-of-type {
+  width: min(720px, 92vw);
+  background: var(--card);
+  border-radius: 16px 16px 0 0;
+  box-shadow: var(--shadow);
+  padding: 24px 20px 8px;
+  margin: 24px 0 0;
+}
+body > h2:first-of-type {
+  width: min(720px, 92vw);
+  background: var(--card);
+  padding-top: 0;
+}
+
+/* --- headings --- */
+h1 {
+  margin: 0 0 12px;
+  font-size: clamp(22px, 3vw, 32px);
+  letter-spacing: 0.2px;
+}
+
+h2 {
+  margin: 0;
+}
+
+/* space out each task line nicely */
+h2 {
+  display: block;
+  font-weight: 600;
+  font-size: clamp(16px, 2.4vw, 20px);
+  color: var(--text);
+  background: linear-gradient(0deg, transparent, transparent) padding-box,
+              linear-gradient(90deg, var(--accent) 0%, transparent 80%) border-box;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 12px 14px 12px 44px;
+  position: relative;
+  margin: 10px auto;
+  width: min(720px, 92vw);
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease, background 200ms ease;
+  cursor: default;
+}
+
+/* checkbox-like icon before each task */
+h2::before {
+  content: "☐";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: var(--muted);
+}
+
+/* hover / focus effect */
+h2:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  border-color: var(--accent-weak);
+  background: linear-gradient(0deg, transparent, transparent) padding-box,
+              linear-gradient(90deg, var(--accent), transparent 80%) border-box;
+}
+
+/* optional: mark completed tasks by adding class="done" later with JS */
+h2.done {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+h2.done::before {
+  content: "☑";
+  color: var(--accent);
+}
+
+/* subtle divider under list (uses the last h2) */
+h2:last-of-type {
+  margin-bottom: 16px;
+}
+
+/* nice scroll behavior on mobile */
+html {
+  scroll-behavior: smooth;
+}
+
+/* small animation for the card */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* responsive tweaks */
+@media (max-width: 480px) {
+  h2 { padding-left: 40px; }
+  h2::before { left: 10px; }
+}
